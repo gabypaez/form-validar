@@ -3,6 +3,7 @@
 require("config.php");
 require_once __DIR__ . '/mpdf/vendor/autoload.php';
 require_once(dirname(__FILE__).'/phpqrcode/qrlib.php');
+session_start();
 
 
 
@@ -28,6 +29,9 @@ if(buscaRepetido($dni,$nombre,$con)==1){
     '" .$celular. "'
 )";
 $resultadoCliente = mysqli_query($con, $InsertCliente);
+
+
+
 }
 
 
@@ -73,8 +77,8 @@ $mail->SMTPSecure = 'tls';            //Enable implicit TLS encryption
 $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
 //Recipients
-$mail->setFrom('mincienciaeinovacion@gmail.com', 'Mailer');
-$mail->addAddress('gaabii.alee.paez@gmail.com', 'Joe User');     //Add a recipient
+$mail->setFrom('mincienciaeinovacion@gmail.com', 'Invitacion');
+$mail->addAddress('gaabii.alee.paez@gmail.com', 'Gabriel');     //Add a recipient
 $mail->addAddress('ellen@example.com');               //Name is optional
 $mail->addReplyTo('info@example.com', 'Information');
 $mail->addCC('cc@example.com');
@@ -88,7 +92,17 @@ $mail->Body    = 'Esta es una prueba!</b>';
 $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
 $mail->send();
-echo 'Mensaje Enviado';
+
+if($resultadoCliente){
+
+  $_SESSION['mensaje']['mensaje'] = '<b>Exelente!</b> Gracias por su Inscripcion :D Por Favor Revise su Email para descargar su entrada';
+  $_SESSION['mensaje']['tipo'] = 'success';
+   }
+    else {
+      $_SESSION['mensaje']['mensaje'] = '<b>Error!</b> No se pudo hacer el Resgistro';
+      $_SESSION['mensaje']['tipo'] = 'danger';
+    }
+
 } catch (Exception $e) {
 echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
@@ -97,3 +111,5 @@ echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 
 
 ?>
+
+<script>window.location.href = 'index.php' </script>

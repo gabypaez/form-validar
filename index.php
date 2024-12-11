@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,7 +69,7 @@
   <div class="col-md-12 " > 
     <strong>Registrar Nuevo Invitado</strong>
   </div>
-      
+  
     <!--
   <div class="col-md-6"> 
     <strong>Lista de Clientes </strong>
@@ -81,7 +84,7 @@
 
         <!----- formulario --->
         <div class="col-sm-5 " >
-          <form name="formCliente" id="formCliente" action="" method="POST">
+          <form name="formCliente" id="formCliente" action="nuevoCliente.php" method="POST">
               <div class="row">
                 
                 <div class="col-md-12 mt-5">
@@ -106,15 +109,14 @@
               </div>
                 <div class="row justify-content-start text-center mt-5">
                     <div class="col-12">
-                        <button class="btn btn-primary btn-block" value="Registrar Nuevo Cliente" id="btnEnviar">
-                           <i class="zmdi zmdi-spinner zmdi-hc-lg zmdi-hc-spin"></i>
-                            Registrase
-                        </button>
+                        <button type="submit" class="btn btn-block btn-primary">Registrar</button>
                     </div>
                 </div>
           </form>
         </div>  
       </div>   
+
+      <?php require_once(dirname(__FILE__).'/mensajes.php'); ?>
       <!--fin form -->
 
           <!-- <div class="col-sm-7">
@@ -203,7 +205,7 @@ $("#dni").on("keyup", function() {
               }
           });
 
-
+/*
         //Funcion para enviar el formulario de registro.
         $('#btnEnviar').click(function(e){
             e.preventDefault();
@@ -216,19 +218,19 @@ $("#dni").on("keyup", function() {
             $("#btnEnviar").attr('disabled',false); //Desabilito el boton enviar
           }, 1000);
 
-          url = "nuevoCliente.php";
-          $.ajax({
+        url = "nuevoCliente.php";
+         $.ajax({
               type: "POST",
               url: url,
               data: $("#formCliente").serialize(),
               success: function(datos)
               {
-                $("#listClientes").load("listClientes.php"); //Cargo nuevamenta la lista de Clientes, pero ya actualizada.
+                alertify.success("Gracias la Inscripcion fue Exitosa, Por Favor revise su email");
                 $("#formCliente")[0].reset(); //Limpio todos los input de mi formulario
               }
           });
         });
-
+*/
 
  });
       
