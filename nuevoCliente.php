@@ -33,6 +33,11 @@ if(buscaRepetido($dni,$correo,$con)==1){
 $resultadoCliente = mysqli_query($con, $InsertCliente);
 
 
+    $string_to_encrypt="$dni";
+    $password="nfdjs789456fdjshfdjsfin&&%%%8uwrjewm";
+    $encrypted_string=openssl_encrypt($string_to_encrypt,"AES-128-ECB",$password);
+    $decrypted_string=openssl_decrypt($encrypted_string,"AES-128-ECB",$password);
+  
 
 }
 
@@ -80,17 +85,14 @@ $mail->Port       = 587;                                    //TCP port to connec
 
 //Recipients
 $mail->setFrom('mincienciaeinovacion@gmail.com', 'Invitacion');
-$mail->addAddress('gaabii.alee.paez@gmail.com', 'Gabriel');     //Add a recipient
-$mail->addAddress('ellen@example.com');               //Name is optional
-$mail->addReplyTo('info@example.com', 'Information');
-$mail->addCC('cc@example.com');
-$mail->addBCC('bcc@example.com');
+$mail->addAddress($correo, $nombre);     //Add a recipient
+
 
 
 //Content
 $mail->isHTML(true);                                  //Set email format to HTML
-$mail->Subject = 'Prueba';
-$mail->Body    = 'Esta es una prueba!</b>';
+$mail->Subject = 'Inscripcion';
+$mail->Body    = 'Holaa!! Muchas Gracias por realizar su inscripcion, por favor descargue su Ticket</b>  <a href="http://control-entrada/generar_entrada_mail.php?dni='.$encrypted_string.'>">Descargar ticket</a>';
 $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
 $mail->send();

@@ -115,7 +115,7 @@ session_start();
           </form>
         </div>  
       </div>   
-
+        <br><br>
       <?php require_once(dirname(__FILE__).'/mensajes.php'); ?>
       <!--fin form -->
 
