@@ -13,8 +13,10 @@ $correo        = $_REQUEST['correo'];
 $celular       = $_REQUEST['celular'];
 
 
-if(buscaRepetido($dni,$nombre,$con)==1){
-  echo 2;
+if(buscaRepetido($dni,$correo,$con)==1){
+
+  $_SESSION['mensaje']['mensaje'] = '<b>Error!</b> Usuario Ya Registrado';
+  $_SESSION['mensaje']['tipo'] = 'danger';
 }else{
   $InsertCliente = "INSERT INTO invitados(
     nombre,
@@ -35,9 +37,9 @@ $resultadoCliente = mysqli_query($con, $InsertCliente);
 }
 
 
-function buscaRepetido($d,$nom,$conexion){
+function buscaRepetido($d,$co,$conexion){
   $sql="SELECT * from invitados 
-    where dni='$d' and nombre='$nom'";
+    where dni='$d' and correo='$co'";
   $result=mysqli_query($conexion,$sql);
 
   if(mysqli_num_rows($result) > 0){
