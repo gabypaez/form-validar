@@ -77,10 +77,13 @@ session_start();
       -->
 </div>
 
+<?php require_once(dirname(__FILE__).'/mensajes.php'); ?>
+
 <div class="row clearfix">
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
   <div class="body">
       <div class="container d-flex justify-content-center">
+      
 
         <!----- formulario --->
         <div class="col-sm-5 " >
@@ -116,7 +119,7 @@ session_start();
         </div>  
       </div>   
         <br><br>
-      <?php require_once(dirname(__FILE__).'/mensajes.php'); ?>
+      
       <!--fin form -->
 
           <!-- <div class="col-sm-7">
